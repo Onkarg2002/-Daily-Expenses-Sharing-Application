@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Expense</title>
+    {% load static %}
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <style>
+        body {
+            background-image: url("{% static 'images/background.jpg' %}"); 
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+        }
+        .container {
+            background: rgba(0, 0, 0, 0.5); 
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 600px;
+            margin-top: 50px;
+        }
+        .form-control, .form-control-select {
+            border-radius: 0.25rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Add Expense</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <input type="text" class="form-control" id="description" name="description" required>
+            </div>
+            <div class="form-group">
+                <label for="total_amount">Total Amount:</label>
+                <input type="number" class="form-control" id="total_amount" name="total_amount" step="0.01" required>
+            </div>
+            <div class="form-group">
+                <label for="split_method">Split Method:</label>
+                <select id="split_method" name="split_method" class="form-control" required>
+                    <option value="equal">Equal</option>
+                    <option value="exact">Exact</option>
+                    <option value="percentage">Percentage</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="created_by">Created by:</label>
+                <select id="created_by" name="created_by" class="form-control" required>
+                    {% for user in users %}
+                        <option value="{{ user.id }}">{{ user.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Expense</button>
+        </form>
+        <a href="{% url 'home' %}" class="btn btn-link mt-3">Back to Home</a>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

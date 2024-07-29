@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Balance Sheet</title>
+    {% load static %}
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <style>
+        body {
+            background-image: url("{% static 'images/background.jpg' %}"); 
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+        }
+        .container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 50px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Balance Sheet for {{ user.name }}</h1>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Expense ID</th>
+                    <th>Description</th>
+                    <th>Total Amount</th>
+                    <th>Split Method</th>
+                    <th>Amount Owed</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for expense in expenses %}
+                    {% for participant in expense.expenseparticipant_set.all %}
+                        {% if participant.user == user %}
+                            <tr>
+                                <td>{{ expense.id }}</td>
+                                <td>{{ expense.description }}</td>
+                                <td>{{ expense.total_amount }}</td>
+                                <td>{{ expense.split_method }}</td>
+                                <td>{{ participant.amount_owed }}</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            </tbody>
+        </table>
+        <a href="{% url 'home' %}" class="btn btn-primary">Back to Home</a>
+    </div>
+
+ 
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
