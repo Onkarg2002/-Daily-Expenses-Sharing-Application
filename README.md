@@ -61,23 +61,31 @@ Access the app at http://127.0.0.1:8000/.
 
 Usage
 Accessing the Application
+
 Home Page: Navigate to the home page to see an overview and navigation links.
 Expense Management: Go to /expenses/add/ to add a new expense and /expenses/ to view existing expenses.
 User Management: Access user registration and login pages via /register/ and /accounts/login/.
+
 Admin Interface
 To manage users and expenses, log in to the admin interface at /admin/ using the superuser credentials created during setup.
 
-API Endpoints
-User Management
+# API Endpoints
+
+**User Management**
 
 GET /api/users/ - List all users
+
 POST /api/users/ - Create a new user
-Expense Management
+
+**Expense Management**
 
 GET /api/expenses/ - List all expenses
+
 POST /api/expenses/ - Create a new expense
+
 GET /api/expenses/{id}/ - Retrieve a specific expense
-Balance Sheets
+
+**Balance Sheets**
 
 GET /api/expenses/balance_sheet/{user_id}/ - Download balance sheet for a specific user
 
