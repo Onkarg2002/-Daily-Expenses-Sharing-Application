@@ -45,6 +45,7 @@ venv\Scripts\activate
 # Apply Migrations
 
 python manage.py makemigrations
+
 python manage.py migrate
 
 # Create a Superuser
