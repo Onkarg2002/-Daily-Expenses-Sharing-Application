@@ -40,6 +40,7 @@ The Expense Sharing App is a web application built using Django and Django Rest 
 # Create and Activate a Virtual Environment
 
 python -m venv venv
+
 venv\Scripts\activate
 
 # Apply Migrations
